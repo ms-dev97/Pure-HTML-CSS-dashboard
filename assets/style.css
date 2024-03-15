@@ -1,0 +1,528 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --body-bg: #31353F;
+    --dark-gray: #1B2028;
+    --primary-color: #3A6FF8;
+    --text-color: #fff;
+    --text-muted: #9E9E9E;
+    --color-success: #1ECB4F;
+    --color-danger: #F46D22;
+}
+body {
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+img {
+    display: block;
+    max-width: 100%;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+button {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+input {
+    border: none;
+    padding: 0;
+    font-family: inherit;
+}
+.wrapper {
+    min-height: 100vh;
+}
+@media screen and (min-width: 48em) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+    }
+}
+
+/* Start sidebar */
+.sidebar {
+    background-color: var(--dark-gray);
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar .logo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+.sidebar-nav {
+    margin-bottom: auto;
+}
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem;
+    margin-bottom: 0.625rem;
+    border-radius: 10px;
+    color: var(--text-muted);
+    transition: 0.1s;
+}
+.sidebar-item .icon path {
+    fill: var(--text-muted);
+}
+.sidebar-item.active,
+.sidebar-item:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-weight: 600;
+}
+.sidebar-item:hover {
+    font-weight: 400;
+}
+.sidebar-item.active .icon path,
+.sidebar-item:hover .icon path {
+    fill: var(--text-color);
+}
+.sidebar-toggle {
+    display: none;
+}
+.sidebar-toggle > img {
+    transform: rotate(-90deg);
+}
+/* Mobile sidebar */
+@media screen and (max-width: 48em) {
+    .sidebar {
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        transform: translateX(-100%);
+        transition: transform 0.1s;
+    }
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    .sidebar-toggle {
+        position: absolute;
+        top: 140px;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        background-color: var(--dark-gray);
+        display: grid;
+        place-items: center;
+        border-radius: 0 5px 5px 0;
+        z-index: 10;
+        transition: transform 0.1s;
+    }
+    .sidebar-toggle.slide {
+        transform: translateX(250px);
+    }
+}
+/* End sidebar */
+
+.main-area {
+    padding: 2rem;
+    grid-column: 2 / 3;
+}
+
+/* Start header */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+.header .title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.header .search {
+    position: relative;
+    flex-basis: 450px;
+    margin: 0 auto;
+}
+@media screen and (max-width: 62em) {
+    .header {
+        flex-wrap: wrap;
+    }
+    .header .search {
+        order: 1;
+        flex-basis: 100%;
+    }
+    .header .notifications {
+        margin-inline-start: auto;
+    }
+}
+.header .search > input {
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    width: 100%;
+    height: 40px;
+    text-indent: 7px;
+    color: var(--text-color);
+}
+.header .search > input:focus {
+    outline: 2px solid var(--primary-color);
+}
+.header .search > label {
+    position: absolute;
+    top: 50%;
+    inset-inline-end: 10px;
+    transform: translateY(-50%);
+}
+.header .notifications {
+    padding: 10px;
+    background: var(--dark-gray);
+    border-radius: 8px;
+}
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-menu .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #9e9e9e;
+}
+.user-menu .name {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+/* End header */
+
+/* Start Coin Cards */
+.coin-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.coin-card {
+    background-color: var(--dark-gray);
+    padding: 1.25rem;
+    border-radius: 15px;
+}
+.coin-card .card-top {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+.coin-card .coin-logo {
+    padding: 10px;
+    background-color: var(--body-bg);
+    border-radius: 10px;
+}
+.coin-card .coin-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-inline-end: auto;
+}
+.coin-card .name {
+    font-weight: bold;
+}
+.coin-card .type {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+.coin-card .card-top .arrow {
+    align-self: center;
+}
+.coin-card .card-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+.coin-card .numbers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.coin-card .price {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.coin-card .percent {
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+.coin-card .percent.success {
+    color: var(--color-success);
+}
+.coin-card .percent.danger {
+    color: var(--color-danger);
+}
+/* End Coin Cards */
+
+.statistics {
+    display: grid;
+    gap: 1rem;
+}
+@media screen and (min-width: 65em) {
+    .statistics {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+.stat-box {
+    background-color: var(--dark-gray);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 4px 4px 33px rgba(0, 0, 0, 0.05);
+}
+.stat-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+}
+/* Start visa */
+.visa {
+    background: url(img/visa-bg.png), var(--primary-color);
+    background-blend-mode: color-burn;
+    padding: 1.25rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+.visa .top,
+.visa .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.visa .title {
+    font-weight: 500;
+    opacity: 0.6;
+}
+.visa .serial {
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-block: 2rem;
+}
+.visa .name {
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+.visa .brand {
+    font-size: 1.125rem;
+    font-weight: bold;
+    font-style: italic;
+}
+/* End visa */
+
+/* Start portfolio */
+.portfolio-item {
+    display: flex;
+    gap: 1rem;
+}
+.portfolio-item:not(:last-child) {
+    margin-bottom: 1.25rem;
+}
+.portfolio-item .icon {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--body-bg);
+}
+@media screen and (min-width: 65em) and (max-width: 82.6875em) {
+    .portfolio-item .icon {
+        width: 40px;
+        height: 40px;
+    }  
+}
+.portfolio-item .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.portfolio-item .details.push-end {
+    margin-inline-start: auto;
+}
+.portfolio-item .name {
+    font-weight: 500;
+}
+.portfolio-item .price {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+.portfolio-item .percent {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.portfolio-item .percent.success {
+    color: var(--color-success);
+}
+.portfolio-item .percent.danger {
+    color: var(--color-danger);
+}
+.portfolio-item .fraction {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+/* End portfolio */
+
+/* Start Chart */
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chart-header .stat-title {
+    margin-bottom: 0;
+}
+.chart-header .options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.chart-header .option {
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #31353F;
+    cursor: pointer;
+}
+.chart-header .currencies {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chart-header .currencies .name {
+    font-size: 0.625rem;
+    color: #E4E4E4;
+    font-weight: 600;
+}
+.chart .coin-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+}
+.chart .coin-filter .coin-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+.chart .coin-filter .price {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+.chart .coin-filter .times {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.chart .coin-filter .time {
+    padding: 5px 15px;
+    border: 1px solid #31353F;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 0.1s;
+}
+.chart .coin-filter .time.active,
+.chart .coin-filter .time:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #E4E4E4;
+}
+.chart .coords {
+    display: flex;
+    gap: 10px;
+}
+.chart .x-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 50px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+.chart .y-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-inline-start: 60px;
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+.chart .graph {
+    position: relative;
+}
+.chart .graph svg {
+    max-width: 100%;
+}
+.chart .graph .bars {
+    position: absolute;
+    bottom: 0;
+    inset-inline-start: 0;
+}
+/* End Chart */
+
+/* Start live market */
+.live-market {
+    margin-top: 2rem;
+}
+.live-market .makret-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.live-market .makret-header .more-button {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 5px 10px;
+    border: 1px solid #31353F;
+    cursor: pointer;
+}
+.live-market table {
+    width: 100%;
+}
+.live-market th {
+    text-align: start;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    padding-bottom: 15px;
+}
+.live-market td {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+.live-market td .coin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+.live-market td .change.success {
+    color: var(--color-success);
+}
+.live-market td .change.danger {
+    color: var(--color-danger);
+}
+.live-market td .more {
+    cursor: pointer;
+}
+/* End live market */
